@@ -26,6 +26,8 @@
 
 - 🔒 Autenticación de Microsoft.
 
+- 🔒 Pronto conexion con cuentas OFFLINE.
+
 - ⛏️ Soporta todas las versiones de Minecraft 1.0 > más recientes.
 
 - 📦 Soporta versiones modificadas con Forge, NeoForge, LegacyFabric, FabricMC y Quilt.
