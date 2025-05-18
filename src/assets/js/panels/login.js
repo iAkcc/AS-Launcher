@@ -13,28 +13,76 @@ class Login {
         this.config = config;
         this.db = new database();
 
-        if (typeof this.config.online == 'boolean') {
-            this.config.online ? this.getMicrosoft() : this.getCrack()
-        } else if (typeof this.config.online == 'string') {
-            if (this.config.online.match(/^(http|https):\/\/[^ "]+$/)) {
-                this.getAZauth();
-            }
+        // Panel Elements
+        this.loginSelectionPanel = document.querySelector('.login-selection');
+        this.loginHomePanel = document.querySelector('.login-home'); // Premium/Online
+        this.loginOfflinePanel = document.querySelector('.login-offline'); // No Premium
+        this.loginAZauthPanel = document.querySelector('.login-AZauth');
+        this.loginAZauthA2FPanel = document.querySelector('.login-AZauth-A2F');
+
+        // Selection Buttons
+        this.showOfflineBtn = document.getElementById('show-offline-login-btn');
+        this.showPremiumBtn = document.getElementById('show-premium-login-btn');
+        this.showAZauthBtn = document.getElementById('show-azauth-login-btn');
+
+        // Back/Cancel Buttons
+        this.backToSelectionBtns = document.querySelectorAll('.cancel-to-selection');
+        this.cancelAZauthA2FBtn = document.querySelector('.login-AZauth-A2F .cancel-to-azauth'); // Specific to A2F panel
+
+        // Initialize login methods (sets up listeners but doesn't show panels)
+        this.getMicrosoft(); // For Premium/Online via login-home panel
+        this.getCrack();     // For Offline/No Premium via login-offline panel
+        this.getAZauth();    // For AZAuth via login-AZauth panel
+
+        this.setupNavigation();
+        this.showPanel(this.loginSelectionPanel); // Show selection panel by default
+
+        // Handle the global cancel button (if it exists, typically shown by settings.js)
+        const globalCancelButton = document.querySelector('.cancel-home');
+        if (globalCancelButton) {
+            globalCancelButton.addEventListener('click', () => {
+                globalCancelButton.style.display = 'none';
+                changePanel('settings');
+            });
         }
-        
-        document.querySelector('.cancel-home').addEventListener('click', () => {
-            document.querySelector('.cancel-home').style.display = 'none'
-            changePanel('settings')
-        })
+    }
+
+    showPanel(panelToShow) {
+        // Hide all panels
+        [this.loginSelectionPanel, this.loginHomePanel, this.loginOfflinePanel, this.loginAZauthPanel, this.loginAZauthA2FPanel].forEach(panel => {
+            if (panel) panel.style.display = 'none';
+        });
+
+        // Show the target panel
+        if (panelToShow) {
+            panelToShow.style.display = 'block'; // Or 'flex' if your CSS uses that
+        }
+    }
+
+    setupNavigation() {
+        this.showOfflineBtn.addEventListener('click', () => this.showPanel(this.loginOfflinePanel));
+        this.showPremiumBtn.addEventListener('click', () => this.showPanel(this.loginHomePanel));
+        this.showAZauthBtn.addEventListener('click', () => this.showPanel(this.loginAZauthPanel));
+
+        this.backToSelectionBtns.forEach(button => {
+            button.addEventListener('click', () => this.showPanel(this.loginSelectionPanel));
+        });
+
+        // Specific cancel for A2F panel to go back to AZAuth email/password
+        if (this.cancelAZauthA2FBtn) {
+            this.cancelAZauthA2FBtn.addEventListener('click', () => this.showPanel(this.loginAZauthPanel));
+        }
     }
 
     async getMicrosoft() {
         console.log('Initializing Microsoft login...');
         let popupLogin = new popup();
-        let loginHome = document.querySelector('.login-home');
-        let microsoftBtn = document.querySelector('.connect-home');
-        loginHome.style.display = 'block';
+        // Panel visibility is now handled by showPanel()
+        // let loginHome = document.querySelector('.login-home');
+        let microsoftBtn = document.querySelector('.login-home .connect-home');
+        // loginHome.style.display = 'block'; // REMOVED
 
-        microsoftBtn.addEventListener("click", () => {
+        microsoftBtn.addEventListener("click", async () => { // Added async
             popupLogin.openPopup({
                 title: 'Connexion',
                 content: 'Veuillez patienter...',
@@ -63,12 +111,11 @@ class Login {
     async getCrack() {
         console.log('Initializing offline login...');
         let popupLogin = new popup();
-        let loginOffline = document.querySelector('.login-offline');
-
-        let emailOffline = document.querySelector('.email-offline');
-        let connectOffline = document.querySelector('.connect-offline');
-        loginOffline.style.display = 'block';
-
+        // Panel visibility is now handled by showPanel()
+        // let loginOffline = document.querySelector('.login-offline');
+        let emailOffline = document.querySelector('.login-offline .email-offline');
+        let connectOffline = document.querySelector('.login-offline .connect-offline');
+        // loginOffline.style.display = 'block'; // REMOVED
         connectOffline.addEventListener('click', async () => {
             if (emailOffline.value.length < 3) {
                 popupLogin.openPopup({
@@ -107,18 +154,18 @@ class Login {
         console.log('Initializing AZauth login...');
         let AZauthClient = new AZauth(this.config.online);
         let PopupLogin = new popup();
-        let loginAZauth = document.querySelector('.login-AZauth');
-        let loginAZauthA2F = document.querySelector('.login-AZauth-A2F');
+        // Panel visibility is now handled by showPanel()
+        // let loginAZauth = document.querySelector('.login-AZauth');
+        // let loginAZauthA2F = document.querySelector('.login-AZauth-A2F');
 
-        let AZauthEmail = document.querySelector('.email-AZauth');
-        let AZauthPassword = document.querySelector('.password-AZauth');
-        let AZauthA2F = document.querySelector('.A2F-AZauth');
-        let connectAZauthA2F = document.querySelector('.connect-AZauth-A2F');
-        let AZauthConnectBTN = document.querySelector('.connect-AZauth');
-        let AZauthCancelA2F = document.querySelector('.cancel-AZauth-A2F');
+        let AZauthEmail = document.querySelector('.login-AZauth .email-AZauth');
+        let AZauthPassword = document.querySelector('.login-AZauth .password-AZauth');
+        let AZauthA2FInput = document.querySelector('.login-AZauth-A2F .A2F-AZauth'); // Renamed to avoid conflict
+        let connectAZauthA2F = document.querySelector('.login-AZauth-A2F .connect-AZauth-A2F');
+        let AZauthConnectBTN = document.querySelector('.login-AZauth .connect-AZauth');
+        // let AZauthCancelA2F = document.querySelector('.login-AZauth-A2F .cancel-AZauth-A2F'); // Handled by this.cancelAZauthA2FBtn
 
-        loginAZauth.style.display = 'block';
-
+        // loginAZauth.style.display = 'block'; // REMOVED
         AZauthConnectBTN.addEventListener('click', async () => {
             PopupLogin.openPopup({
                 title: 'Connexion en cours...',
@@ -145,15 +192,10 @@ class Login {
                 });
                 return;
             } else if (AZauthConnect.A2F) {
-                loginAZauthA2F.style.display = 'block';
-                loginAZauth.style.display = 'none';
+                this.showPanel(this.loginAZauthA2FPanel); // Show A2F panel
                 PopupLogin.closePopup();
 
-                AZauthCancelA2F.addEventListener('click', () => {
-                    loginAZauthA2F.style.display = 'none';
-                    loginAZauth.style.display = 'block';
-                });
-
+                // Event listener for AZauthCancelA2FBtn is set in setupNavigation()
                 connectAZauthA2F.addEventListener('click', async () => {
                     PopupLogin.openPopup({
                         title: 'Connexion en cours...',
@@ -161,7 +203,7 @@ class Login {
                         color: 'var(--color)'
                     });
 
-                    if (AZauthA2F.value == '') {
+                    if (AZauthA2FInput.value == '') {
                         PopupLogin.openPopup({
                             title: 'Erreur',
                             content: 'Veuillez entrer le code A2F.',
@@ -170,7 +212,7 @@ class Login {
                         return;
                     }
 
-                    AZauthConnect = await AZauthClient.login(AZauthEmail.value, AZauthPassword.value, AZauthA2F.value);
+                    AZauthConnect = await AZauthClient.login(AZauthEmail.value, AZauthPassword.value, AZauthA2FInput.value);
 
                     if (AZauthConnect.error) {
                         PopupLogin.openPopup({

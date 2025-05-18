@@ -19,7 +19,7 @@ const os = require('os');
 class Launcher {
     async init() {
         this.initLog();
-        console.log('Initializing Launcher...');
+        console.log('Inicializando el Launcher...');
         this.shortcut()
         await setBackground()
         this.initFrame();
@@ -61,7 +61,7 @@ class Launcher {
     }
 
     initFrame() {
-        console.log('Initializing Frame...')
+        console.log('Inicializando el Marco...')
         const platform = os.platform() === 'darwin' ? "darwin" : "other";
 
         document.querySelector(`.${platform} .frame`).classList.toggle('hide')
@@ -86,7 +86,7 @@ class Launcher {
     }
 
     async initConfigClient() {
-        console.log('Initializing Config Client...')
+        console.log('Inicializando la Configuración del Cliente...')
         let configClient = await this.db.readData('configClient')
 
         if (!configClient) {
@@ -119,7 +119,7 @@ class Launcher {
     createPanels(...panels) {
         let panelsElem = document.querySelector('.panels')
         for (let panel of panels) {
-            console.log(`Initializing ${panel.name} Panel...`);
+            console.log(`Inicializando el Panel ${panel.name}...`);
             let div = document.createElement('div');
             div.classList.add('panel', panel.id)
             div.innerHTML = fs.readFileSync(`${__dirname}/panels/${panel.id}.html`, 'utf8');
@@ -142,10 +142,10 @@ class Launcher {
                     continue
                 }
                 if (account.meta.type === 'Xbox') {
-                    console.log(`Account Type: ${account.meta.type} | Username: ${account.name}`);
+                    console.log(`Tipo de cuenta: ${account.meta.type} | Usuario: ${account.name}`);
                     popupRefresh.openPopup({
-                        title: 'Connexion',
-                        content: `Refresh account Type: ${account.meta.type} | Username: ${account.name}`,
+                        title: 'Conexión',
+                        content: `Actualizando cuenta Tipo: ${account.meta.type} | Usuario: ${account.name}`,
                         color: 'var(--color)',
                         background: false
                     });
@@ -158,7 +158,7 @@ class Launcher {
                             configClient.account_selected = null
                             await this.db.updateData('configClient', configClient)
                         }
-                        console.error(`[Account] ${account.name}: ${refresh_accounts.errorMessage}`);
+                        console.error(`[Cuenta] ${account.name}: ${refresh_accounts.errorMessage}`);
                         continue;
                     }
 
@@ -167,10 +167,10 @@ class Launcher {
                     await addAccount(refresh_accounts)
                     if (account_ID == account_selected) accountSelect(refresh_accounts)
                 } else if (account.meta.type == 'AZauth') {
-                    console.log(`Account Type: ${account.meta.type} | Username: ${account.name}`);
+                    console.log(`Tipo de cuenta: ${account.meta.type} | Usuario: ${account.name}`);
                     popupRefresh.openPopup({
-                        title: 'Connexion',
-                        content: `Refresh account Type: ${account.meta.type} | Username: ${account.name}`,
+                        title: 'Conexión',
+                        content: `Actualizando cuenta Tipo: ${account.meta.type} | Usuario: ${account.name}`,
                         color: 'var(--color)',
                         background: false
                     });
@@ -182,7 +182,7 @@ class Launcher {
                             configClient.account_selected = null
                             this.db.updateData('configClient', configClient)
                         }
-                        console.error(`[Account] ${account.name}: ${refresh_accounts.message}`);
+                        console.error(`[Cuenta] ${account.name}: ${refresh_accounts.message}`);
                         continue;
                     }
 
@@ -191,10 +191,10 @@ class Launcher {
                     await addAccount(refresh_accounts)
                     if (account_ID == account_selected) accountSelect(refresh_accounts)
                 } else if (account.meta.type == 'Mojang') {
-                    console.log(`Account Type: ${account.meta.type} | Username: ${account.name}`);
+                    console.log(`Tipo de cuenta: ${account.meta.type} | Usuario: ${account.name}`);
                     popupRefresh.openPopup({
-                        title: 'Connexion',
-                        content: `Refresh account Type: ${account.meta.type} | Username: ${account.name}`,
+                        title: 'Conexión',
+                        content: `Actualizando cuenta Tipo: ${account.meta.type} | Usuario: ${account.name}`,
                         color: 'var(--color)',
                         background: false
                     });
@@ -216,7 +216,7 @@ class Launcher {
                             configClient.account_selected = null
                             this.db.updateData('configClient', configClient)
                         }
-                        console.error(`[Account] ${account.name}: ${refresh_accounts.errorMessage}`);
+                        console.error(`[Cuenta] ${account.name}: ${refresh_accounts.errorMessage}`);
                         continue;
                     }
 
@@ -225,7 +225,7 @@ class Launcher {
                     await addAccount(refresh_accounts)
                     if (account_ID == account_selected) accountSelect(refresh_accounts)
                 } else {
-                    console.error(`[Account] ${account.name}: Account Type Not Found`);
+                    console.error(`[Cuenta] ${account.name}: Tipo de cuenta no encontrado`);
                     this.db.deleteData('accounts', account_ID)
                     if (account_ID == account_selected) {
                         configClient.account_selected = null

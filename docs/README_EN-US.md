@@ -4,19 +4,19 @@
 
 #### [<p align="center">]() *(A powerful and efficient minecraft launcher based on electron)*
 [<p align="center">]()
-![GitHub all releases](https://img.shields.io/github/downloads/luuxis/Selvania-Launcher/total?style=for-the-badge)
+![GitHub all releases](https://img.shields.io/github/downloads/luuxis/Axs-Launcher/total?style=for-the-badge)
 ![Discord](https://img.shields.io/discord/819729377650278420?style=for-the-badge)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/luuxis/Selvania-Launcher?style=for-the-badge)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/luuxis/Axs-Launcher?style=for-the-badge)
 [<p align="center">]()
-![GitHub forks](https://img.shields.io/github/forks/luuxis/Selvania-Launcher?style=for-the-badge)
-![GitHub Repo stars](https://img.shields.io/github/stars/luuxis/Selvania-Launcher?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/luuxis/Axs-Launcher?style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/luuxis/Axs-Launcher?style=for-the-badge)
 
 #### *<p align="center">Return to the original documentation by clicking [Here](README.md).</p>*
 
 ---
 ### **<ins><p align="center">Terms of use :</p>**
-- To use the code you must fork the project
-- To use the code your code must always be public
+- Para usar el código, debes bifurcar el proyecto.
+- Para usar el código, tu código siempre debe ser público.
 
 ---
 
@@ -81,7 +81,7 @@ Do you like the project? Leave a ⭐ star on the repository!
 ---
 ### **<ins><p align="center">Download:</p>**
 
-You can download the launcher from [GitHub Releases](https://github.com/luuxis/Selvania-Launcher/releases).
+You can download the launcher from [GitHub Releases](https://github.com/luuxis/Axs-Launcher/releases).
 
 Supported platforms:
 
@@ -93,10 +93,10 @@ If you are downloading from Releases, select the installer for your system.
 
  Platforme | Fichier |
 | -------- | ---- |
-| Windows x64 | `Selvania-Launcher-win-x64.exe ` |
-| macOS x64 | `Selvania-Launcher-mac-x64.dmg` |
-| macOS arm64 | `Selvania-Launcher-mac-arm64.dmg` |
-| Linux x64 | `Selvania-Launcher-linux-x86_64.AppImage` |
+| Windows x64 | `Axs-Launcher-win-x64.exe ` |
+| macOS x64 | `Axs-Launcher-mac-x64.dmg` |
+| macOS arm64 | `Axs-Launcher-mac-arm64.dmg` |
+| Linux x64 | `Axs-Launcher-linux-x86_64.AppImage` |
 
 ---
 
