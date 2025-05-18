@@ -1,6 +1,6 @@
 <p align="center"><img src="images/icon.png" alt="icon-launcher"></p>
 
-<h1 align="center">Owleaf Launcher</h1>
+<h1 align="center">CraftLaunch</h1>
 
 #### [<p align="center">]() *(A powerful and efficient minecraft launcher based on electron)*
 [<p align="center">]()
