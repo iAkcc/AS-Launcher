@@ -1,20 +1,20 @@
 {
     "name": "Axs-Launcher",
-    "preductname": "Axs Launcher",
+    "productName": "Axs Launcher",
     "version": "2.0.7",
-    "description": "Launcher Mincraft pour le serveur Axs",
+    "description": "Lanzador de Minecraft para el servidor Axs",
     "main": "src/app.js",
     "author": {
-        "name": "luuxis, Inc.",
-        "email": "contact@luuxis.fr",
-        "url": "https://github.com/luuxis"
+        "name": "Axres",
+        "email": "axres@owleaf.studio",
+        "url": "https://github.com/iAkcc"
     },
     "url": "http://launcher.luuxis.fr",
     "scripts": {
         "start": "cross-env-shell NODE_ENV=dev electron .",
         "dev": "cross-env-shell DEV_TOOL=open nodemon --exec npm start",
         "build": "node build.js --obf=true --build=platform",
-        "icon": "node build.js --icon=https://raw.githubusercontent.com/luuxis/Axs-Launcher/master/src/assets/images/icon.png"
+        "icon": "node build.js --icon=https://raw.githubusercontent.com/iAkcc/Axs-Launcher/master/src/assets/images/icon.png"
     },
     "license": "CCANC",
     "nodemonConfig": {
@@ -39,6 +39,6 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/luuxis/Axs-Launcher.git"
+        "url": "git+https://github.com/iAkcc/Axs-Launcher.git"
     }
 }
